@@ -1,0 +1,278 @@
+﻿<Window x:Class="MuMaps.MyPlaylist"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MuMaps"
+        mc:Ignorable="d"
+        Title="MyPlaylist" Height="768" Width="1366" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="191*"/>
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="21*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="1150*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle x:Name="Fondo" Grid.ColumnSpan="3" OpacityMask="Black" Grid.RowSpan="4">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/src/fondo.jpg" 
+                            Stretch="UniformToFill" Opacity="0.9" TileMode="None"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle x:Name="FondoLogin" Margin="10,10,10,5" StrokeThickness="5"
+                   RadiusX="50" RadiusY="50" Stroke="#FFF7F8F9" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+            <Rectangle.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FFF16F79" Offset="0.358"/>
+                    <GradientStop Color="#FF7E1B22" Offset="1"/>
+                </RadialGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Button x:Name="btnVolver" BorderThickness="2" BorderBrush="White" MaxHeight="35" MaxWidth="220" Margin="1044,535,60,37" Click="btnVolver_Click" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF1252E" Offset="0.006"/>
+                    <GradientStop Color="#FF6C1C1C" Offset="0.997"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <StackPanel Orientation="Horizontal" Width="98">
+                <Image Source="/src/return.png" OpacityMask="White" Width="35" Height="23" Margin="0,0,0,2"/>
+                <TextBlock Text="Volver"
+                    FontSize="19"
+                    VerticalAlignment="Center" Margin="0,0,0,2" FontFamily="Berlin Sans FB" Width="64" Foreground="White"/>
+            </StackPanel>
+        </Button>
+        <Image x:Name="Logo" Source="/src/muMap2.png"  Grid.Row="1" Margin="35,48,1058,400" Grid.Column="1"/>
+        <Label x:Name="lbl_Viaje" Grid.Column="1" Content="CREAR PLAYLIST" HorizontalAlignment="Left" Height="145" Margin="169,38,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1060" FontSize="140" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Berlin Sans FB" Foreground="White" BorderBrush="Black"/>
+        <GroupBox Grid.Column="1" BorderThickness="2"  Grid.Row="1" Margin="46,190,315,32" BorderBrush="#FFCD262D" Background="#FFF7D0D0" Grid.RowSpan="2">
+            <GroupBox.Header>
+                <Border CornerRadius="15">
+                    <TextBlock Text="Datos de Playlist" Foreground="White" Background="#FFCD262D" FontFamily="Berlin Sans FB" FontSize="22"/>
+                </Border>
+            </GroupBox.Header>
+            <Grid Height="372" Margin="0,0,-2,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="257*"/>
+                    <ColumnDefinition Width="65*"/>
+                    <ColumnDefinition Width="237*"/>
+                    <ColumnDefinition Width="305*"/>
+                    <ColumnDefinition Width="13*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="31*"/>
+                    <RowDefinition Height="31*"/>
+                    <RowDefinition Height="31*"/>
+                    <RowDefinition Height="18*"/>
+                    <RowDefinition Height="7*"/>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+                <StackPanel></StackPanel>
+                <TextBox x:Name="tbx_busArtista" Width="237" TextWrapping="Wrap" KeyUp="tbx_Artista_KeyUp" Margin="0,44,0,11" RenderTransformOrigin="0.5,0.5" BorderThickness="3" BorderBrush="#FFE55359" FontFamily="Berlin Sans FB" FontSize="14" HorizontalAlignment="Center"  Grid.Column="1">
+                    <TextBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="-0.01"/>
+                            <RotateTransform Angle="-0.004"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBox.RenderTransform>
+                </TextBox>
+                <ListBox x:Name="lst_Artistas" Margin="0,76,0,10" Width="237" HorizontalAlignment="Center" BorderThickness="3" BorderBrush="#FFE55359" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.RowSpan="2"  Grid.Column="1" Height="100" SelectionChanged="lst_Artistas_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+
+                                <Image Source="{Binding Image}" Width="55" Height="55" Margin="10,0,0,0"/>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock VerticalAlignment="Center" Margin="10,7,5,5" Text="{Binding Name}" FontFamily="Berlin Sans FB" FontSize="18" />
+                                    <TextBlock VerticalAlignment="Center" Margin="10,7,0,0" Text="{Binding Followers}" FontFamily="Berlin Sans FB" FontSize="13" />
+                                </StackPanel>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock x:Name="tbx_artista" HorizontalAlignment="Center" Height="36" TextWrapping="Wrap"  VerticalAlignment="Top" Width="237" TextAlignment="Center" Margin="0,10,0,0" Grid.Column="1">
+                    <TextBlock.Background>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#FFE55359" Offset="1"/>
+                            <GradientStop Color="#FFF7D0D0" Offset="0.449"/>
+                        </RadialGradientBrush>
+                    </TextBlock.Background><InlineUIContainer>
+                <StackPanel Orientation="Horizontal" Height="30" Width="132">
+                    <Image Source="/src/microphone.png" OpacityMask="White"  Height="20" Margin="10,7,0,0"/>
+                    <TextBlock VerticalAlignment="Center" Margin="6,7,0,0" Text="Artista" FontFamily="Berlin Sans FB" FontSize="24" />
+                </StackPanel>
+            </InlineUIContainer></TextBlock>
+                <ListBox x:Name="lst_Playlist"  HorizontalAlignment="Center" Height="296" Margin="0,48,0,0" VerticalAlignment="Top" Width="286" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="4" FontFamily="Berlin Sans FB" BorderThickness="3" BorderBrush="#FFE55359" Grid.RowSpan="5">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+
+                                <Image Source="{Binding image}" Width="55" Height="55" Margin="10,0,0,0"/>
+                                <StackPanel Orientation="Vertical">
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock VerticalAlignment="Center" Margin="10,7,5,5" Text="{Binding nombre}" FontFamily="Berlin Sans FB" FontSize="18" />
+
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock VerticalAlignment="Center" Margin="10,7,0,0" Text="{Binding artist}" FontFamily="Berlin Sans FB" FontSize="13" />
+                                        <TextBlock VerticalAlignment="Center" Margin="20,7,0,0" Text="{Binding duration}" FontFamily="Berlin Sans FB" FontSize="10" />
+                                    </StackPanel>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock x:Name="tbx_album" HorizontalAlignment="Left" Height="36" TextWrapping="Wrap"  VerticalAlignment="Top" TextAlignment="Center" Margin="7,12,0,0" Grid.ColumnSpan="2" Grid.Column="2" Width="237">
+                    <TextBlock.Background>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#FFE55359" Offset="1"/>
+                            <GradientStop Color="#FFF7D0D0" Offset="0.449"/>
+                        </RadialGradientBrush>
+                    </TextBlock.Background><InlineUIContainer>
+                        <StackPanel Orientation="Horizontal" Height="30" Width="132">
+                            <Image Source="/src/microphone.png" OpacityMask="White"  Height="20" Margin="10,7,0,0"/>
+                            <TextBlock VerticalAlignment="Center" Margin="6,7,0,0" Text="Álbum" FontFamily="Berlin Sans FB" FontSize="24" />
+                        </StackPanel>
+                    </InlineUIContainer></TextBlock>
+                <TextBlock x:Name="tbx_playlist" Height="38" TextWrapping="Wrap"  VerticalAlignment="Top" TextAlignment="Center" Margin="0,12,0,0" Grid.Column="4" HorizontalAlignment="Center" Width="286">
+                    <TextBlock.Background>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#FFE55359" Offset="1"/>
+                            <GradientStop Color="#FFF7D0D0" Offset="0.449"/>
+                        </RadialGradientBrush>
+                    </TextBlock.Background><InlineUIContainer>
+                        <StackPanel Orientation="Horizontal" Height="30" Width="214">
+                            <Image Source="/src/playlist.png" OpacityMask="White"  Height="20" Margin="10,7,0,0"/>
+                            <TextBlock VerticalAlignment="Center" Margin="6,7,0,0" Text="Playlist Generada" FontFamily="Berlin Sans FB" FontSize="24" FontWeight="Normal" />
+                        </StackPanel>
+                    </InlineUIContainer></TextBlock>
+                <TextBox x:Name="tbx_busAlbum" TextWrapping="Wrap" KeyUp="tbx_busAlbum_KeyUp" Margin="7,46,0,9" RenderTransformOrigin="0.5,0.5" BorderThickness="3" BorderBrush="#FFE55359" FontFamily="Berlin Sans FB" FontSize="14" Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Width="237">
+                    <TextBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="-0.01"/>
+                            <RotateTransform Angle="-0.004"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBox.RenderTransform>
+                </TextBox>
+                <ListBox x:Name="lst_Albums" Margin="7,76,0,10" Width="237" HorizontalAlignment="Left" BorderThickness="3" BorderBrush="#FFE55359" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="2" Height="100" SelectionChanged="lst_Albums_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+
+                                <Image Source="{Binding url}" Width="55" Height="55" Margin="10,0,0,0"/>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock VerticalAlignment="Center" Margin="10,7,5,5" Text="{Binding Title}" FontFamily="Berlin Sans FB" FontSize="18" />
+                                    <TextBlock VerticalAlignment="Center" Margin="10,7,0,0" Text="{Binding artist}" FontFamily="Berlin Sans FB" FontSize="13" />
+                                </StackPanel>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBox x:Name="tbx_Cancion" Width="493" TextWrapping="Wrap" KeyUp="tbx_Cancion_KeyUp" Margin="10,34,0,21" RenderTransformOrigin="0.5,0.5" BorderThickness="3" BorderBrush="#FFE55359" FontFamily="Berlin Sans FB" FontSize="14" HorizontalAlignment="Left" Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="1">
+                    <TextBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="0" AngleX="0.001"/>
+                            <RotateTransform Angle="-0.007"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBox.RenderTransform>
+                </TextBox>
+                <ListBox x:Name="lst_Canciones" Margin="10,69,0,11" Width="493" HorizontalAlignment="Left" BorderThickness="3" BorderBrush="#FFE55359" d:ItemsSource="{d:SampleData ItemCount=5}"  Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="3" Grid.Column="1" SelectionChanged="lst_Canciones_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+
+                                <Image Source="{Binding image}" Width="55" Height="55" Margin="10,0,0,0"/>
+                                <StackPanel Orientation="Vertical">
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock VerticalAlignment="Center" Margin="10,7,5,5" Text="{Binding nombre}" FontFamily="Berlin Sans FB" FontSize="18" />
+
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock VerticalAlignment="Center" Margin="10,7,0,0" Text="{Binding artist}" FontFamily="Berlin Sans FB" FontSize="13" />
+                                        <TextBlock VerticalAlignment="Center" Margin="20,7,0,0" Text="{Binding duration}" FontFamily="Berlin Sans FB" FontSize="10" />
+                                    </StackPanel>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock x:Name="tbx_cancion" HorizontalAlignment="Left" Height="36" TextWrapping="Wrap"  VerticalAlignment="Top"  TextAlignment="Center" Margin="10,0,0,0" Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="1" Width="493">
+                    <TextBlock.Background>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#FFE55359" Offset="1"/>
+                            <GradientStop Color="#FFF7D0D0" Offset="0.449"/>
+                        </RadialGradientBrush>
+                    </TextBlock.Background><InlineUIContainer>
+                <StackPanel Orientation="Horizontal" Height="30" Width="132">
+                    <Image Source="/src/cancionIcon.png" OpacityMask="White"  Height="20" Margin="10,7,0,0"/>
+                    <TextBlock VerticalAlignment="Center" Margin="6,7,0,0" Text="Canción" FontFamily="Berlin Sans FB" FontSize="24" />
+                </StackPanel>
+            </InlineUIContainer></TextBlock>
+                <Image Source="/src/lupa.png" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="219,50,0,0" VerticalAlignment="Top" Width="23"/>
+                <Image Source="/src/lupa.png" Grid.Column="3" HorizontalAlignment="Left" Height="24" Margin="151,51,0,0" VerticalAlignment="Top" Width="23"/>
+                <Image Source="/src/lupa.png" Grid.Column="3" HorizontalAlignment="Left" Height="24" Margin="151,41,0,0" VerticalAlignment="Top" Width="23" Grid.Row="2"/>
+            </Grid>
+        </GroupBox>
+        <TextBox x:Name="tbx_Playlist" Grid.Column="1" HorizontalAlignment="Left" Height="35" Margin="971,208,0,0" Grid.Row="1" TextWrapping="Wrap" Text="PLAYLIST" VerticalAlignment="Top" Width="248" FontSize="22" FontWeight="Normal" TextAlignment="Center" IsReadOnly="True" FontFamily="Berlin Sans FB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <TextBox.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FFE55359" Offset="1"/>
+                    <GradientStop Color="#FFF7D0D0" Offset="0.449"/>
+                </RadialGradientBrush>
+            </TextBox.Background>
+        </TextBox>
+        <Label Grid.Column="1" Content="Nombre:" HorizontalAlignment="Left" Margin="965,266,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Normal" FontFamily="Berlin Sans FB" FontSize="17" Foreground="White"/>
+        <TextBox x:Name="tbx_Nombre" BorderThickness="3" Grid.Column="1" HorizontalAlignment="Left" Margin="1041,263,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" BorderBrush="#FFB3424A" Height="34" FontFamily="Berlin Sans FB" FontSize="18"/>
+        <Label Grid.Column="1" Content="Descripción:" HorizontalAlignment="Left" Margin="962,311,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Normal" FontFamily="Berlin Sans FB" FontSize="17" Foreground="White"/>
+        <TextBox x:Name="tbx_Descripcion" BorderThickness="3" Grid.Column="1" HorizontalAlignment="Left" Height="72" Margin="1057,312,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" BorderBrush="#FFE55359" FontFamily="Berlin Sans FB" FontSize="18"/>
+        <CheckBox x:Name="cbx_Publico" BorderThickness="3" Grid.Column="1" Content="Pública" HorizontalAlignment="Left" Margin="965,365,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Normal" BorderBrush="#FFE55359" FontFamily="Berlin Sans FB" FontSize="17" Foreground="White"/>
+        <Button x:Name="btnCreate_Playlist" BorderThickness="2" BorderBrush="White" MaxHeight="35" MaxWidth="220" Margin="1044,465,60,44" Grid.Column="1" Grid.Row="1" Click="btnCreate_Playlist_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF1252E" Offset="0.006"/>
+                    <GradientStop Color="#FF6C1C1C" Offset="0.997"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <StackPanel Orientation="Horizontal" Width="144">
+                <Image Source="/src/Spotify.png" OpacityMask="White" Width="35" Height="23" Margin="0,0,0,2"/>
+                <TextBlock Text="Crear Playlist"
+                    FontSize="18"
+                    VerticalAlignment="Center" Margin="0,0,0,2" FontFamily="Berlin Sans FB" Width="172" Foreground="White"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="btnHistory" BorderThickness="2" BorderBrush="White" MaxHeight="35" MaxWidth="220" Margin="1044,402,60,106" Grid.Column="1" Grid.Row="1" Click="btnHistory_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF1252E" Offset="0.006"/>
+                    <GradientStop Color="#FF6C1C1C" Offset="0.997"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <StackPanel Orientation="Horizontal" Width="133">
+                <Image Source="/src/historial.png" OpacityMask="White" Width="35" Height="23" Margin="0,0,0,2"/>
+                <TextBlock Text="Ver Historial"
+                    FontSize="17"
+                    VerticalAlignment="Center" Margin="0,0,0,2" FontFamily="Berlin Sans FB" Width="103" Foreground="White"/>
+            </StackPanel>
+        </Button>
+
+
+
+    </Grid>
+</Window>
